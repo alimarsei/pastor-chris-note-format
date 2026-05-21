@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CCBC — Post Bible Study Review</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #111111;
+    --surface: #1a1a1a;
+    --surface2: #202020;
+    --border: #2e2e2e;
+    --accent: #c8a96e;
+    --accent2: #7eb8a4;
+    --danger: #e07070;
+    --text: #ede9e2;
+    --text2: #b0aa9f;
+    --muted: #666;
+    --action-bg: #1e1a12;
+    --action-border: #c8a96e55;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    padding: 32px 16px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  /* Header */
+  .header {
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* Section */
+  .section { margin-bottom: 40px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+  .dot.green { background: var(--accent2); }
+  .dot.red { background: var(--danger); }
+
+  em { color: var(--text2); font-style: italic; }
+
+  /* Person block */
+  .person-block { margin-bottom: 20px; }
+
+  .person-name-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-left: 2px;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111;
+    flex-shrink: 0;
+  }
+  .avatar.green { background: var(--accent2); }
+  .avatar.teal { background: #5b9bd5; }
+
+  .person-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  /* Action items */
+  .action-card {
+    background: var(--action-bg);
+    border: 1px solid var(--action-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .action-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 18px;
+    border-bottom: 1px solid #c8a96e22;
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    min-width: 24px;
+    padding-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .action-body { flex: 1; }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .tag-person { background: #7eb8a418; color: var(--accent2); border: 1px solid #7eb8a440; }
+  .tag-action { background: #c8a96e18; color: var(--accent); border: 1px solid #c8a96e40; }
+  .tag-general { background: #ffffff10; color: #999; border: 1px solid #ffffff20; }
+
+  /* Leadership transition card */
+  .transition-card {
+    background: #1a1212;
+    border: 1px solid #e0707040;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Divider */
+  .divider { height: 1px; background: var(--border); margin: 36px 0; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+
+  /* Mobile tweaks */
+  @media (max-width: 480px) {
+    body { padding: 24px 14px 60px; }
+    .item { padding: 14px 15px; font-size: 0.93rem; }
+    .action-item { padding: 14px 15px; font-size: 0.93rem; }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="label">CCBC &nbsp;·&nbsp; Campus Bible Study</div>
+    <h1>Post Bible Study Review</h1>
+    <div class="meta">Thursday, May 21, 2026 &nbsp;·&nbsp; Supervised by Rushae &amp; Jordan</div>
+  </div>
+
+  <!-- General Operations -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">General Operations</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="card">
+      <div class="item"><div class="dot"></div><div>Follow up with people and assign caller names sooner — both need to happen earlier in the week, not last minute.</div></div>
+      <div class="item"><div class="dot"></div><div>Assign Wisdom and Alisia to people who have already been on a call with them. They are new and unknown numbers may come across as a scam to people who do not recognize them.</div></div>
+      <div class="item"><div class="dot"></div><div>Get into the meeting no later than 2:45PM to set up tech, slides, music, and images — confirm everything is working before people arrive.</div></div>
+      <div class="item"><div class="dot"></div><div>Do not assume people are reading the group chat. Text specific instructions with clear tasks. Eliminate all room for error and misinterpretation. Example: <em>"Call these people for 3PM Bible Study."</em></div></div>
+      <div class="item"><div class="dot"></div><div>Start reaching out on Monday. Flyers and materials should go out earlier in the week.</div></div>
+      <div class="item"><div class="dot"></div><div>Implement a buddy system — assign people to reach out throughout the week, especially to Mason, Tago, and Abby.</div></div>
+      <div class="item"><div class="dot"></div><div>For Alisia and Wisdom, assign them to people they already know. Example: Arnold was already in conversation with Alisia — that is a natural connection.</div></div>
+    </div>
+  </div>
+
+  <!-- Individual Feedback -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Individual Feedback</div>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- Rushae -->
+    <div class="person-block">
+      <div class="person-name-header">
+        <div class="avatar">R</div>
+        <div class="person-label">Rushae</div>
+      </div>
+      <div class="card">
+        <div class="item"><div class="dot"></div><div>Engage the crowd — call on people randomly to eliminate awkward pauses and keep everyone locked in.</div></div>
+        <div class="item"><div class="dot"></div><div>We know the people in the meeting talk — use that. Pull them in intentionally.</div></div>
+      </div>
+    </div>
+
+    <!-- Jordan -->
+    <div class="person-block">
+      <div class="person-name-header">
+        <div class="avatar green">J</div>
+        <div class="person-label">Jordan</div>
+      </div>
+      <div class="card">
+        <div class="item"><div class="dot green"></div><div>Follow up with people before the session, not only after.</div></div>
+        <div class="item"><div class="dot green"></div><div>Read through the outline for at least 30 minutes before going in — maintain one clear thought throughout the session.</div></div>
+        <div class="item"><div class="dot green"></div><div>Give people actionable tasks during the session — not just answering questions. Example: tell someone to look up a scripture and post it in the chat.</div></div>
+        <div class="item"><div class="dot green"></div><div>Be more assertive with questions. Do not phrase them as optional — remove "if you want to."</div></div>
+        <div class="item"><div class="dot green"></div><div>Call on specific people who tend to be quiet.</div></div>
+        <div class="item"><div class="dot green"></div><div>Do not say "if that makes sense" — it gives the perspective that you do not know what you are talking about. Even when unsure about the outline, speak with boldness and confidence.</div></div>
+        <div class="item"><div class="dot green"></div><div>Pray before reading the outline and before going into the meeting. Expect the Holy Spirit to speak through you — for utterance, knowledge, and words to edify. He will give you what you need.</div></div>
+      </div>
+    </div>
+
+    <!-- Christal -->
+    <div class="person-block">
+      <div class="person-name-header">
+        <div class="avatar teal">C</div>
+        <div class="person-label">Christal</div>
+      </div>
+      <div class="card">
+        <div class="item"><div class="dot"></div><div>You are very intelligent — but not everyone operates at your level. Break down the message of the outline as simply as possible.</div></div>
+        <div class="item"><div class="dot"></div><div>Tailor your questions specifically to help people understand the three points of the outline, not just engage in general discussion.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Action Items -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Action Items</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="action-card">
+
+      <div class="action-item">
+        <div class="action-number">01</div>
+        <div class="action-body">
+          <div class="tag tag-person">Wisdom &nbsp;·&nbsp; Rushae &nbsp;·&nbsp; Christal &nbsp;·&nbsp; Jordan</div>
+          <div>Reach out to everyone who did not attend today and find out who is available for Saturday.</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">02</div>
+        <div class="action-body">
+          <div class="tag tag-action">Jordan &nbsp;·&nbsp; CC Christal</div>
+          <div>Text Dan about renewing student government and how to go about changing leadership names.</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">03</div>
+        <div class="action-body">
+          <div class="tag tag-action">Jordan</div>
+          <div>Talk to Ms. Karen or Ms. Chrissy the last week of every month to book out a room for the entire following month. When doing your first event, indicate the need for club space. Have someone shadow you when filling out the form.</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-number">04</div>
+        <div class="action-body">
+          <div class="tag tag-general">Outreach</div>
+          <div>Identify students on campus who do not have a church. Once they go through foundation school, continue training them. Find people who will catch the vision.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Leadership Transition -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Leadership Transition</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="transition-card">
+      <div class="item"><div class="dot red"></div><div>Bring Emmanuel and Alisia into leadership responsibilities — make sure they are being brought in as Jordan and Rushae transition out.</div></div>
+    </div>
+  </div>
+
+  <div class="footer">CCBC Campus Bible Study &nbsp;·&nbsp; Internal Review Notes &nbsp;·&nbsp; May 21, 2026</div>
+
+</div>
+</body>
+</html>
